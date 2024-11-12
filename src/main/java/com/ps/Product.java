@@ -1,4 +1,4 @@
 package com.ps;
 
-public class Product {
+public interface Product {
 }
