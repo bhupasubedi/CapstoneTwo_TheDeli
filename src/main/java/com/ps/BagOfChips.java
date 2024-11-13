@@ -1,6 +1,6 @@
 package com.ps;
 
-public class BagOfChips implements Product{
+public class BagOfChips extends Product{
    private String flavor;
 
    public BagOfChips(String flavor) {
@@ -13,5 +13,10 @@ public class BagOfChips implements Product{
 
    public void setFlavor(String flavor) {
       this.flavor = flavor;
+   }
+
+   @Override
+   double getPrice() {
+      return 1.50;
    }
 }

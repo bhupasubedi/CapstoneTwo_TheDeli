@@ -80,7 +80,7 @@ public class UserInterFace {
 
     private static void AddSandwich() {
 
-        System.out.println("1) Please select your bread type:");
+        System.out.println("Please select your bread type:");
         System.out.println("1) White");
         System.out.println("2) Wheat");
         System.out.println("3) Rye");

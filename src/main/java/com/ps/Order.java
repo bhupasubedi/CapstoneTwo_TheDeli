@@ -1,9 +1,10 @@
 package com.ps;
 
-import java.util.List;
+import java.util.AbstractList;
+
 
 public class Order {
-    List<Product> products;
+    private AbstractList<Product> products;
 
     public static double getTotal() {
 

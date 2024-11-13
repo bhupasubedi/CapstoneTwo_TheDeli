@@ -1,6 +1,6 @@
 package com.ps;
 
-public class Drink implements Product{
+public class Drink extends Product{
    private String flavor;
    private String size;
 
@@ -23,5 +23,18 @@ public class Drink implements Product{
 
    public void setSize(String size) {
       this.size = size;
+   }
+
+   @Override
+   double getPrice() {
+      double drinkPrice = 0.0;
+      if ("small".equalsIgnoreCase(this.getSize())) {
+         drinkPrice = 2.0;
+      } else if ("medium".equalsIgnoreCase(this.getSize())) {
+         drinkPrice = 2.50;
+      } else {
+         drinkPrice = 3.00;
+      }
+      return drinkPrice;
    }
 }
