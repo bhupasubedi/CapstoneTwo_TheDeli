@@ -1,14 +1,18 @@
 package com.ps;
 
-import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Order {
-    private AbstractList<Product> products;
+    private List<Product> products = new ArrayList<>();
 
-    public static double getTotal() {
-
-        return 0;
+    public double getTotal() {
+        double total = 0.0;
+        for (Product product : products) {
+            total += product.getPrice();
+        }
+        return total;
     }
 }
 
