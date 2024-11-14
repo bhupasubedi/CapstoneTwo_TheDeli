@@ -7,7 +7,7 @@ public class Sandwich extends Product {
     private String breadType;
     private int size;
    private boolean isToasted;
-   private List<Topping> toppings = new ArrayList<>();
+   private List<Topping> toppings;
 
 
     public Sandwich(String breadType, int size, boolean isToasted) {
@@ -40,6 +40,17 @@ public class Sandwich extends Product {
         isToasted = toasted;
     }
 
+    public void setToppings(List<Topping> toppings) {
+        this.toppings = toppings;
+    }
+
+    public List<Topping> getToppings() {
+        if (toppings == null) {
+           toppings = new ArrayList<>();
+        }
+        return toppings;
+    }
+
     @Override
     double getPrice() {
         double sandwichSizePrice = 0.0;
@@ -48,14 +59,10 @@ public class Sandwich extends Product {
             sandwichSizePrice = 5.50;
         } else if (8 == this.size) {
             sandwichSizePrice = 7.0;
-        } else {
+        } else if (12 == this.size) {
             sandwichSizePrice = 8.50;
         }
         return sandwichSizePrice + totalToppingPrice;
-    }
-
-    public List<Topping> getToppings() {
-        return toppings;
     }
 
     double getTotalToppingPrice() {
@@ -65,4 +72,15 @@ public class Sandwich extends Product {
         }
         return totalToppingPrice;
     }
+
+    @Override
+    public String toString() {
+        return "Sandwich{" +
+                "breadType='" + breadType + '\'' +
+                ", size=" + size +
+                ", isToasted=" + isToasted +
+                ", toppings=" + toppings +
+                '}';
+    }
+
 }

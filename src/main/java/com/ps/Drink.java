@@ -32,9 +32,18 @@ public class Drink extends Product{
          drinkPrice = 2.0;
       } else if ("medium".equalsIgnoreCase(this.getSize())) {
          drinkPrice = 2.50;
-      } else {
+      } else if ("large".equalsIgnoreCase(this.getSize())){
          drinkPrice = 3.00;
       }
       return drinkPrice;
+   }
+
+   @Override
+   public String toString() {
+      return "Drink{" +
+              "flavor='" + flavor + '\'' +
+              ", size='" + size + '\'' +
+              ", price='" + getPrice() +
+              '}';
    }
 }

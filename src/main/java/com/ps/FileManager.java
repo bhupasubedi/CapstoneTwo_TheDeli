@@ -6,16 +6,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileManager {
-    public void saveReceipt(Order order) {
+    public void saveReceipt(Order order, String fileName, String orderPerson, String dateTime) {
 
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("receipt.csv", true))) {
-            if (order instanceof Order) {
-                Order ordersReceipt = (Order) order;
-                String orderSaleReceipt = order.toString();
-                bufferedWriter.write(orderSaleReceipt + "\n");
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, true))) {
+            String orderSaleReceipt = "order for: " + orderPerson  + "\n" + "order placed on: " + dateTime + "\n" + order.toString();
+            bufferedWriter.write(orderSaleReceipt + "\n");
 
-
-            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -1,15 +1,17 @@
 package com.ps;
 
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class UserInterFace {
 
-    private ArrayList<Sandwich> sandwiches = new ArrayList<>();
     private static Scanner intScanner = new Scanner(System.in);
     private static Scanner stringScanner = new Scanner(System.in);
+    private static FileManager fileManager = new FileManager();
 
     public static void display() {
 
@@ -32,6 +34,7 @@ public class UserInterFace {
                     break;
                 default:
                     System.out.println("Command not found, please try again...");
+                    break;
 
             }
         } while (choice != 0);
@@ -66,6 +69,7 @@ public class UserInterFace {
                     break;
                 case 4:
                     Checkout(order);
+                    orderSelection = 5;
                     break;
                 case 5:
                     System.out.println("5) Going back to main menu ");
@@ -80,8 +84,6 @@ public class UserInterFace {
     }
 
     private static void AddSandwich(Order order) {
-        System.out.println("What is your name?");
-        String name = stringScanner.nextLine();
 
         System.out.println("What kind of bread would you like?");
         System.out.println("1) White");
@@ -132,17 +134,13 @@ public class UserInterFace {
             topping = "Steak";
         } else if (2 == meatsToppingChoice) {
             topping = "Ham";
-        }
-        else if (3 == meatsToppingChoice) {
+        } else if (3 == meatsToppingChoice) {
             topping = "Salami";
-        }
-        else if (4 == meatsToppingChoice) {
+        } else if (4 == meatsToppingChoice) {
             topping = " Roast beef";
-        }
-        else if (5 == meatsToppingChoice) {
+        } else if (5 == meatsToppingChoice) {
             topping = "Chicken";
-        }
-        else if (6 == meatsToppingChoice) {
+        } else if (6 == meatsToppingChoice) {
             topping = " Bacon";
         }
         Topping meatTopping = new Topping(topping, "Meats", "Premium", calculateToppingPrice("Meats", sandwichSize));
@@ -163,16 +161,14 @@ public class UserInterFace {
         int extraCheese = intScanner.nextInt();
 
         String cheeseToppings = "";
-        if (1== cheeseToppingChoice){
+        if (1 == cheeseToppingChoice) {
             cheeseToppings = "American";
 
-        } else if (2== extraCheese) {
+        } else if (2 == extraCheese) {
             cheeseToppings = "Provolone";
-        }
-        else if (3== cheeseToppingChoice) {
+        } else if (3 == cheeseToppingChoice) {
             cheeseToppings = "Cheddar";
-        }
-        else if(4== cheeseToppingChoice) {
+        } else if (4 == cheeseToppingChoice) {
             cheeseToppings = "Swiss";
         }
         Topping cheeseTopping = new Topping(cheeseToppings, "Cheese", "Premium", calculateToppingPrice("Cheese", sandwichSize));
@@ -290,8 +286,7 @@ public class UserInterFace {
 
             }
 
-
-        } while (saucesType != 8) ;
+        } while (saucesType != 8);
 
         System.out.println("4) Would you like your sandwich toasted? (1 for Yes, 2 for No):");
         int isToastedChoice = intScanner.nextInt();
@@ -301,61 +296,133 @@ public class UserInterFace {
         } else if (2 == isToastedChoice) {
             isToasted = false;
         }
-        Product sandwich = new Sandwich(sandwichBreadType, sandwichSize, isToasted);
+        Sandwich sandwich = new Sandwich(sandwichBreadType, sandwichSize, isToasted);
+        sandwich.setToppings(toppingList);
+        order.getProducts().add(sandwich);
     }
 
     private static void AddDrink(Order order) {
 
-        System.out.println("Please select a drink flavor:");
-        String drinkFlavor = stringScanner.nextLine();
+        System.out.println("Please select a drink :");
 
-        System.out.println("choose an size of drink");
-        int drinkSize = intScanner.nextInt();
+        System.out.println("1) Coke");
+        System.out.println("2) Pepsi");
+        System.out.println("3) Lemonade");
+        System.out.println("4) Water bottle");
+        System.out.println("5) No drink");
+        int drinkChoice = intScanner.nextInt();
+
+        System.out.println("Choose a size of drink");
+        System.out.println("1) Small ($2.00)");
+        System.out.println("2) Medium ($2.50)");
+        System.out.println("3) Large ($3.00)");
+
+        int drinkSizeChoice = intScanner.nextInt();
+
+        String drinkSize = "";
+        if (1 == drinkSizeChoice) {
+            drinkSize = "small";
+        } else if (2 == drinkSizeChoice) {
+            drinkSize = "medium";
+        } else if (3 == drinkSizeChoice) {
+            drinkSize = "large";
+        }
+
+        Drink drink = null;
+        String drinkOptions = "";
+        if (1 == drinkChoice) {
+            drinkOptions = "Coke";
+            drink = new Drink(drinkOptions, drinkSize);
+        } else if (2 == drinkChoice) {
+            drinkOptions = "Pepsi";
+            drink = new Drink(drinkOptions, drinkSize);
+        } else if (3 == drinkChoice) {
+            drinkOptions = "Lemonade";
+            drink = new Drink(drinkOptions, drinkSize);
+        } else if (4 == drinkChoice) {
+            drinkOptions = "Water bottle";
+            drink = new Drink(drinkOptions, drinkSize);
+        }
+
+        if (drink != null) {
+            order.getProducts().add(drink);
+        }
 
     }
 
     public static void AddChips(Order order) {
         System.out.println("Please select a chips flavor:");
-        int chipsFlavor = intScanner.nextInt();
+
+        System.out.println("1) Lays");
+        System.out.println("2) SunChips");
+        System.out.println("3) Doritos");
+        System.out.println("4) Ruffles");
+        System.out.println("5) No chips");
+        int chipsChoice = intScanner.nextInt();
+
+        String chipsOption = "";
+        BagOfChips bagOfChips = null;
+        if (1 == chipsChoice) {
+            chipsOption = "Lays";
+            bagOfChips = new BagOfChips(chipsOption);
+        } else if (2 == chipsChoice) {
+            chipsOption = "SunChips";
+            bagOfChips = new BagOfChips(chipsOption);
+        } else if (3 == chipsChoice) {
+            chipsOption = "Doritos";
+            bagOfChips = new BagOfChips(chipsOption);
+        } else if (4 == chipsChoice) {
+            chipsOption = "Ruffles";
+            bagOfChips = new BagOfChips(chipsOption);
+        }
+
+        if (bagOfChips != null) {
+            order.getProducts().add(bagOfChips);
+        }
 
     }
 
     private static void Checkout(Order order) {
+        System.out.println(order.toString());
 
         System.out.println("Thank you for visiting Delicious Sandwich Shop! Would you like to confirm your order?");
-        int checkOutChoice;
 
-        do {
-            System.out.println("1) Press 1 to confirm the order");
-            System.out.println("2) press 2 to cancel the order");
-            System.out.println("0) Press 0 to go back to main menu");
+        System.out.println("1) Press 1 to confirm the order");
+        System.out.println("2) press 2 to cancel the order");
 
-            System.out.println("Command:");
-            checkOutChoice = intScanner.nextInt();
+        System.out.println("Command: ");
+        int checkOutChoice = intScanner.nextInt();
 
-            switch (checkOutChoice) {
-                case 1:
-                    confirmOrder();
-                    break;
-                case 2:
-                    cancelOrder();
-                    break;
-                case 0:
-                    System.out.println("Going back to main menu");
-                    break;
-                default:
-                    System.out.println("Command not found, please try again");
+        switch (checkOutChoice) {
+            case 1:
+                confirmOrder(order);
+                break;
+            case 2:
+                cancelOrder(order);
+                break;
 
-            }
-        } while (checkOutChoice != 0);
+        }
+    }
+
+    private static void confirmOrder(Order order) {
+        System.out.println("What is your name?");
+        String name = stringScanner.nextLine();
+
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
+        String formattedDateTime = now.format(formatter);
+
+        String fileName = name + formattedDateTime;
+        fileManager.saveReceipt(order, fileName, name, formattedDateTime);
+        System.out.println("Order confirmed ....");
+
 
     }
 
-    private static void confirmOrder() {
+    private static void cancelOrder(Order order) {
+        order = null;
+        System.out.println("Order cancelled ....");
 
-    }
-
-    private static void cancelOrder() {
     }
 
     private static double calculateToppingPrice(String toppingType, int sandwichSize) {

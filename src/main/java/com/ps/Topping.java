@@ -45,4 +45,13 @@ public class Topping {
         this.price = price;
     }
 
+    @Override
+    public String toString() {
+        return "Topping{" +
+                "name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", category='" + category + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }
