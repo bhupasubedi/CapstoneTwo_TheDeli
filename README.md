@@ -21,10 +21,20 @@ It loops through the menu until the user chooses to check out, at which point it
 ![MainMenu4Options.png](Photos%2FMainMenu4Options.png)![MainMenu5Options.png](Photos%2FMainMenu5Options.png)![MainMenu6Options.png](Photos%2FMainMenu6Options.png)
 
 ## Add a Drink
+Choose a flavor (Coke, Pepsi, Lemonade, Water bottle).
+Choose size (small, medium, large).
+Choose size (small, medium, large).
 ![DrinkMainMenu7.png](Photos%2FDrinkMainMenu7.png)
 
 ## Add Chips
+Choose a flavor (Lays,SunChips, Doritos,Ruffles).
 ![ChipsmainMenu8.png](Photos%2FChipsmainMenu8.png)
 
 ## Checkout
+View a summary of the order and the total price.
+
 ![CheckOutMenu9.png](Photos%2FCheckOutMenu9.png)
+
+## Save Order
+A receipt file will be saved with all order details.
+![SaveOrder1.png](Photos%2FSaveOrder1.png)
